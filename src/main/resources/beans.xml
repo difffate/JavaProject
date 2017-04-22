@@ -8,4 +8,8 @@
     <bean id="profileTest" class="org.zheng.profile.ProfileTest">
         <property name="environment" value="${environment}"/>
     </bean>
+
+    <bean class="org.zheng.proxy.aop.AopBeanPostProcessor" />
+    <bean class="org.zheng.proxy.aop.RegexMethodBeanPostProcessor" />
+    <bean id="regexMethodModel" class="org.zheng.proxy.aop.RegexMethodModel" />
 </beans>

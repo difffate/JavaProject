@@ -19,7 +19,21 @@
             <artifactId>spring-context</artifactId>
             <version>4.2.5.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>2.5.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/lib/objenesis-2.5.1.jar</systemPath>
+        </dependency>
     </dependencies>
+
     <!--定义配置文件-->
     <profiles>
         <profile>
@@ -50,6 +64,8 @@
             </properties>
         </profile>
     </profiles>
+
+    <!--定义构建相关-->
     <build>
         <filters>
             <!--这里定义配置资源的目录，并且根据变量不同来选取不同的目录-->
@@ -63,5 +79,43 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        <plugins>
+            <!--将依赖包另外放在一个目录引用-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                            <includeScope>compile</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <Class-Path>lib/objenesis-2.5.1.jar</Class-Path>
+                        </manifestEntries>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>org.zheng.proxy.objenesis.ObjenesisTest</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
