@@ -8,6 +8,13 @@ import java.util.List;
  */
 public class DBQuery {
 
+    public DBQuery() {
+    }
+
+    public DBQuery(Integer i) {
+        System.out.println("Here's in DBQuery Constructor");
+    }
+
     public String getElement(String id) {
         return id + "_CGLib";
     }
@@ -22,5 +29,9 @@ public class DBQuery {
 
     public String methodForFixedValue(String param) {
         return "Hello_" + param;
+    }
+
+    public final String sayHello() {
+        return "Hello Everyone！";
     }
 }
