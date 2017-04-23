@@ -8,6 +8,8 @@ import java.lang.reflect.Proxy;
 public class TestJDKProxy {
 
     public static void main(String[] args) {
+        //设置变量，可在将代理类保存在项目根目录
+        //System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
         DBQuery dbQuery = new DBQuery();
         DBQueryProxy dbQueryProxy = new DBQueryProxy(dbQuery);
         IDBQuery query = (IDBQuery) Proxy
