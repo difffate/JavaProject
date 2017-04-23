@@ -15,4 +15,12 @@ public class DBQuery {
     public List<String> getAllElements() {
         return Arrays.asList("Hello_CGLib1", "Hello_CGLib2");
     }
+
+    public String methodForNoop() {
+        return "Hello_Noop";
+    }
+
+    public String methodForFixedValue(String param) {
+        return "Hello_" + param;
+    }
 }
