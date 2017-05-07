@@ -8,6 +8,7 @@ import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.regex.Pattern;
 
 /**
@@ -32,7 +33,7 @@ public class RegexMethodBeanPostProcessor implements BeanPostProcessor {
                 break;
             }
         }
-        if (useSelfClass) {
+        if (useSelfClass && !Modifier.isFinal(bean.getClass().getModifiers())) {
             return createBean(bean);
         }
         return bean;

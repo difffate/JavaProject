@@ -7,32 +7,34 @@
     <groupId>org.zheng</groupId>
     <artifactId>JavaProject</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <properties>
+        <spring_version>4.2.5.RELEASE</spring_version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring_version}</version>
         </dependency>
         <dependency>
             <groupId>c3p0</groupId>
@@ -105,6 +107,13 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
             <!--将依赖包另外放在一个目录引用-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
