@@ -6,7 +6,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <context:property-placeholder location="*.properties"/>
+
     <context:component-scan base-package="org.zheng"/>
+
     <bean id="profileTest" class="org.zheng.profile.ProfileTest">
         <property name="environment" value="${environment}"/>
     </bean>
@@ -36,14 +38,17 @@
           p:dataSource-ref="dataSource"/>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
           p:dataSource-ref="dataSource"/>
+    <!--第1种方式-->
     <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
-    <tx:advice id="advice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="transfer" propagation="REQUIRED"/>
-        </tx:attributes>
-    </tx:advice>
-    <aop:config proxy-target-class="true">
-        <aop:pointcut id="pointcut" expression="execution(* org.zheng.transaction.BankService.*(..))"/>
-        <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
-    </aop:config>
+    <!--第2种方式-->
+    <!--<tx:advice id="advice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="transfer" propagation="REQUIRED"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config proxy-target-class="true">-->
+        <!--<aop:pointcut id="pointcut" expression="execution(* org.zheng.transaction.BankService.*(..))"/>-->
+        <!--<aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>-->
+    <!--</aop:config>-->
+    <!--第3种方式采用配置类的形式，见org.zheng.transaction.DAOConfiguration-->
 </beans>

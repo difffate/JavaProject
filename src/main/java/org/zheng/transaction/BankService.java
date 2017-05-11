@@ -12,11 +12,12 @@ public class BankService {
 
     @Autowired
     private BankRepository bankRepository;
+
     @Transactional
     public void transfer(long fromUserId, long toUserId, double money) {
         //源账号扣款
         this.bankRepository.moneyOut(fromUserId, money);
-//        int a =  1/0;
+        int a = 1 / 0;
         //目标账号增加金额
         this.bankRepository.moneyIn(toUserId, money);
     }
