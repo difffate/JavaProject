@@ -1,6 +1,7 @@
 package org.zheng.profile;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 @Data
 public class ProfileTest {
 
+    @Value("${environment}")
     private String environment;
 
     public static void main(String[] args) throws IOException {

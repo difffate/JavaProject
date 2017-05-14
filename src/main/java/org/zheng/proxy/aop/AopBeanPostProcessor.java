@@ -21,7 +21,8 @@ public class AopBeanPostProcessor implements BeanPostProcessor {
         if (beanName.equals("profileTest")) {
             //重新设置变量的值
             Method method = ReflectionUtils.findMethod(bean.getClass(), "setEnvironment", String.class);
-            ReflectionUtils.invokeMethod(method, bean, "hellozheng");
+            //执行下面这句，会将environment的值改变
+//            ReflectionUtils.invokeMethod(method, bean, "hellozheng");
         }
         return bean;
     }
