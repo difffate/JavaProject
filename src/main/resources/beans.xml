@@ -49,4 +49,72 @@
         <!--<aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>-->
     <!--</aop:config>-->
     <!--第3种方式采用配置类的形式，见org.zheng.transaction.DAOConfiguration-->
+
+
+    <bean id="team" class="org.zheng.convert.model.Team">
+        <property name="id">
+            <value type="int">10</value>
+        </property>
+        <property name="names" value="a,b,c,d" />
+        <property name="leader" value="Leon" />
+        <property name="memberCount" value="c:0010" />
+        <property name="createDate" value="20150126"/>
+        <property name="viceLeader" ref="viceLeader"/>
+        <property name="logo" value="Champagne" />
+        <property name="subNames">
+            <list>
+                <value>11</value>
+                <value>22</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="viceLeader" class="org.zheng.convert.model.Member">
+        <property name="name" value="Bill" />
+    </bean>
+
+    <!--定义属性编辑器，String到List的转换方式，但是线程不安全。后面用StringToListFormmater-->
+    <!--<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+        <!--<property name="customEditors">-->
+            <!--<map>-->
+                <!--<entry key="java.util.List" value="org.zheng.convert.transfer.ListTypeEditSupport" />-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--使用Converter的方式-->
+    <!--<bean id="conversionService"-->
+          <!--class="org.springframework.context.support.ConversionServiceFactoryBean">-->
+        <!--<property name="converters">-->
+            <!--<set>-->
+                <!--<bean class="org.zheng.convert.transfer.MemberConverter" />-->
+            <!--</set>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--使用Formatter的方式-->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="registerDefaultFormatters" value="false" />
+        <!--直接定义formatter-->
+        <property name="formatters">
+            <set>
+                <bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory" />
+                <bean class="org.zheng.convert.transfer.MemberFormatter" />
+                <bean class="org.zheng.convert.transfer.StringToListFormatter" />
+            </set>
+        </property>
+        <!--fomatter注册器的方式-->
+        <property name="formatterRegistrars">
+            <set>
+                <bean class="org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar">
+                    <property name="dateFormatter">
+                        <bean class="org.springframework.format.datetime.joda.DateTimeFormatterFactoryBean">
+                            <property name="pattern" value="yyyyMMdd" />
+                        </bean>
+                    </property>
+                </bean>
+            </set>
+        </property>
+    </bean>
 </beans>
