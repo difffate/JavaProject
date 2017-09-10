@@ -45,12 +45,14 @@ public class StackImpl<T> implements IStack<T> {
             }
             while (q1.size() > 1) {
                 T front = q1.front();
+                //倒2元素为新的栈顶元素
                 if (q1.size() == 2) {
                     topRecord = front;
                 }
                 q2.push(front);
                 q1.pop();
             }
+            //弹出最后一个元素
             q1.pop();
         } else if (q1.size() == 0) { //从q2导到q1
             if (q2.size() == 1) {  //只有一个元素
@@ -59,12 +61,14 @@ public class StackImpl<T> implements IStack<T> {
             }
             while (q2.size() > 1) {
                 T front = q2.front();
+                //倒2元素为新的栈顶元素
                 if (q2.size() == 2) {
                     topRecord = front;
                 }
                 q1.push(front);
                 q2.pop();
             }
+            //弹出最后一个元素
             q2.pop();
         }
         size--;
