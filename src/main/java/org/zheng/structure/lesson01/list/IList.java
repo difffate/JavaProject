@@ -13,4 +13,6 @@ public interface IList<T> {
     Element<T> front();
 
     int size();
+
+    void display();
 }

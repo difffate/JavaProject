@@ -11,6 +11,10 @@ public class QueueImpl<R> implements IQueue<R> {
 
     private ListImpl<R> list;
 
+    public QueueImpl() {
+        this.list = new ListImpl<>();
+    }
+
     @Override
     public boolean push(R newElement) {
         if (list == null) {

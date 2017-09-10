@@ -40,6 +40,9 @@ public class ListImpl<T> implements IList<T> {
         }
         first = first.getNext();
         size--;
+        if (size == 0) {
+            last = null;
+        }
         return true;
     }
 
@@ -51,5 +54,22 @@ public class ListImpl<T> implements IList<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public void display() {
+        if (first == null) {
+            return;
+        }
+        Element<T> temp = first;
+        System.out.print("list={");
+        do {
+            System.out.print(temp.getValue());
+            temp = temp.getNext();
+            if (temp != null) {
+                System.out.print(", ");
+            }
+        } while (temp != null);
+        System.out.println("}");
     }
 }
